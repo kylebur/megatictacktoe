@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaTicTacToe - Ultimate Tic-Tac-Toe for iMessage & iOS</title>
+    <meta name="description" content="MegaTicTacToe is a modern 81-cell strategic Tic-Tac-Toe game designed specifically for Apple iMessage and iOS. Play with friends in chat or challenge smart AI.">
+    <link rel="icon" type="image/png" href="store_screenshots/screenshot_1.png">
+    <style>
+        :root {
+            --primary: #0071e3;
+            --primary-hover: #0077ed;
+            --bg: #fbfbfd;
+            --surface: #ffffff;
+            --text: #1d1d1f;
+            --text-secondary: #86868b;
+            --border: #d2d2d7;
+            --accent: #5856d6;
+            --accent-gradient: linear-gradient(135deg, #0071e3 0%, #5856d6 100%);
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(251, 251, 253, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .nav-container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-badge {
+            width: 34px;
+            height: 34px;
+            background: var(--accent-gradient);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text);
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1080px;
+            margin: 60px auto 40px;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(0, 113, 227, 0.08);
+            border: 1px solid rgba(0, 113, 227, 0.2);
+            border-radius: 999px;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: 54px;
+            line-height: 1.08;
+            font-weight: 800;
+            letter-spacing: -1.8px;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #1d1d1f 0%, #434344 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.lead {
+            font-size: 21px;
+            line-height: 1.45;
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin: 0 auto 36px;
+            font-weight: 400;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 13px 26px;
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(0, 113, 227, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #e8e8ed;
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: #dedee3;
+        }
+
+        /* Screenshot Preview Grid */
+        .showcase {
+            max-width: 1080px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .screenshot-card {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+            max-width: 280px;
+            width: 100%;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .screenshot-card img {
+            width: 100%;
+            border-radius: 18px;
+            display: block;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .screenshot-caption {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            text-align: center;
+            margin-top: 12px;
+            margin-bottom: 4px;
+        }
+
+        .screenshot-sub {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: var(--surface);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 80px 24px;
+        }
+
+        .section-header {
+            max-width: 720px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        .section-tag {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 14px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        .features-grid {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+        }
+
+        .feature-card {
+            background: var(--bg);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--surface);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Rules Section */
+        .rules-section {
+            max-width: 860px;
+            margin: 80px auto;
+            padding: 0 24px;
+        }
+
+        .rule-step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 28px;
+            background: var(--surface);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .step-num {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .step-content h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .step-content p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-copy {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 38px;
+                letter-spacing: -1px;
+            }
+            .hero p.lead {
+                font-size: 18px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-badge">#</div>
+                <span>MegaTicTacToe</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Marketing</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a href="PrivacyPolicy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero">
+            <div class="pill-badge">Built Exclusively for iOS & iMessage</div>
+            <h1>The Ultimate 81-Cell<br>Tic-Tac-Toe Showdown</h1>
+            <p class="lead">
+                Play strategic Tic-Tac-Toe directly in your iMessage conversations. Every move you make dictates which board your opponent must play in next. Pure strategy, rich haptics, zero ads.
+            </p>
+            <div class="cta-group">
+                <a href="#rules" class="btn btn-primary">How To Play</a>
+                <a href="support.html" class="btn btn-secondary">Get Support</a>
+                <a href="PrivacyPolicy.html" class="btn btn-secondary">Privacy Policy</a>
+            </div>
+        </section>
+
+        <!-- Visual Screenshots Showcase -->
+        <section class="showcase">
+            <div class="screenshots-grid">
+                <div class="screenshot-card">
+                    <img src="store_screenshots/screenshot_1.png" alt="Strategic 9x9 Grid">
+                    <div class="screenshot-caption">Strategic 9x9 Grid</div>
+                    <div class="screenshot-sub">9 boards nested in one master grid</div>
+                </div>
+                <div class="screenshot-card">
+                    <img src="store_screenshots/screenshot_2.png" alt="Seamless iMessage Integration">
+                    <div class="screenshot-caption">iMessage Native</div>
+                    <div class="screenshot-sub">Play right within your text chats</div>
+                </div>
+                <div class="screenshot-card">
+                    <img src="store_screenshots/screenshot_3.png" alt="Smart Offline AI">
+                    <div class="screenshot-caption">Solo AI Practice</div>
+                    <div class="screenshot-sub">Challenge MegaAI offline anytime</div>
+                </div>
+                <div class="screenshot-card">
+                    <img src="store_screenshots/screenshot_4.png" alt="Match Win Celebration">
+                    <div class="screenshot-caption">Victory Celebrations</div>
+                    <div class="screenshot-sub">Dynamic confetti and victory haptics</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Highlights -->
+        <section class="features-section">
+            <div class="section-header">
+                <div class="section-tag">Key Features</div>
+                <h2 class="section-title">Designed to Elevate Your Chats</h2>
+                <p class="section-subtitle">A classic reimagined with deep tactical layers and fluid iOS craftsmanship.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Native iMessage Gameplay</h3>
+                    <p>No external accounts or logins required. Launch straight from the Messages app drawer and exchange moves effortlessly.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Next-Level Strategic Depth</h3>
+                    <p>Unlike standard Tic-Tac-Toe, your choice of square sends your opponent to that corresponding board. Plan several turns in advance.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Integrated Solo Mode</h3>
+                    <p>Practice tactics even when you're offline. Play against MegaAI with multiple difficulty patterns directly on your device.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Tactile Haptics & Polish</h3>
+                    <p>Enjoy crisp native haptic feedback, fluid 60fps animations, glassmorphism design, and cheerful confetti on winning moves.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Private & Ad-Free</h3>
+                    <p>Zero tracking, zero analytics, and no third-party ads. Your game state travels securely across Apple's private iMessage network.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Optimized for All Devices</h3>
+                    <p>Looks gorgeous on every iPhone screen size, supporting both compact and expanded iMessage drawer views.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Rules -->
+        <section class="rules-section" id="rules">
+            <div class="section-header">
+                <div class="section-tag">Game Guide</div>
+                <h2 class="section-title">How Ultimate Tic-Tac-Toe Works</h2>
+                <p class="section-subtitle">Easy to learn in two minutes, but filled with boundless tactical opportunities.</p>
+            </div>
+
+            <div class="rule-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h4>The 3×3 Grid of 3×3 Boards</h4>
+                    <p>The game consists of 9 mini Tic-Tac-Toe boards arranged in a 3×3 master grid (81 total cells). Player X makes the first move anywhere on the board.</p>
+                </div>
+            </div>
+
+            <div class="rule-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h4>Dictating Your Opponent's Board</h4>
+                    <p>Whichever cell you choose in a mini board determines which mini board your opponent must play in next. For example, playing in the top-right corner of a mini board forces your opponent to play in the top-right mini board!</p>
+                </div>
+            </div>
+
+            <div class="rule-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h4>Winning a Mini Board</h4>
+                    <p>Get three of your marks (X or O) in a row inside any mini board to win and claim that entire board for your symbol.</p>
+                </div>
+            </div>
+
+            <div class="rule-step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h4>Free Choice Rule</h4>
+                    <p>If you are sent to a mini board that has already been won or is tied/full, you are granted free choice to play in any unoccupied cell across the entire board.</p>
+                </div>
+            </div>
+
+            <div class="rule-step">
+                <div class="step-num">5</div>
+                <div class="step-content">
+                    <h4>Claiming the Master Victory</h4>
+                    <p>Win three mini boards in a row (horizontally, vertically, or diagonally) on the master grid to win the entire MegaTicTacToe match!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="index.html">Marketing Page</a></li>
+                <li><a href="support.html">Support & Contact</a></li>
+                <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+            </ul>
+            <p class="footer-copy">&copy; 2026 Kyle Burchesky. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

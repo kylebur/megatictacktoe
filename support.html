@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaTicTacToe - Support & Help Center</title>
+    <meta name="description" content="Support, FAQs, and contact information for MegaTicTacToe for iMessage & iOS.">
+    <link rel="icon" type="image/png" href="store_screenshots/screenshot_1.png">
+    <style>
+        :root {
+            --primary: #0071e3;
+            --primary-hover: #0077ed;
+            --bg: #fbfbfd;
+            --surface: #ffffff;
+            --text: #1d1d1f;
+            --text-secondary: #86868b;
+            --border: #d2d2d7;
+            --accent: #5856d6;
+            --accent-gradient: linear-gradient(135deg, #0071e3 0%, #5856d6 100%);
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(251, 251, 253, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .nav-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-badge {
+            width: 34px;
+            height: 34px;
+            background: var(--accent-gradient);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 960px;
+            margin: 50px auto 80px;
+            padding: 0 24px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            font-weight: 800;
+            letter-spacing: -1.2px;
+            margin-bottom: 14px;
+            color: var(--text);
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* Support Contact Card */
+        .contact-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 36px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            max-width: 540px;
+        }
+
+        .contact-info h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 17px;
+            text-decoration: none;
+        }
+
+        .contact-email:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 28px;
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(0, 113, 227, 0.25);
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 50px;
+        }
+
+        .section-heading {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: var(--surface);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+            letter-spacing: -0.3px;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .faq-answer strong {
+            color: var(--text);
+        }
+
+        /* App Details */
+        .app-meta-box {
+            margin-top: 40px;
+            background: #f0f0f5;
+            border-radius: 16px;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .meta-item h4 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .meta-item p {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-copy {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .contact-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-badge">#</div>
+                <span>MegaTicTacToe</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Marketing</a></li>
+                    <li><a href="support.html" class="active">Support</a></li>
+                    <li><a href="PrivacyPolicy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Support Container -->
+    <div class="container">
+        <div class="hero">
+            <h1>Support & Help Center</h1>
+            <p>Have questions about MegaTicTacToe, need assistance, or want to suggest an improvement? We're here to help.</p>
+        </div>
+
+        <!-- Direct Contact Card -->
+        <div class="contact-card">
+            <div class="contact-info">
+                <h2>Direct Support Contact</h2>
+                <p>If you encounter an issue, have a gameplay question, or need assistance with MegaTicTacToe, please send an email directly to the developer.</p>
+                <a href="mailto:kyle.burchesky@mac.com?subject=MegaTicTacToe%20Support" class="contact-email">
+                    ✉️ kyle.burchesky@mac.com
+                </a>
+            </div>
+            <div>
+                <a href="mailto:kyle.burchesky@mac.com?subject=MegaTicTacToe%20Support" class="btn">Send Email</a>
+            </div>
+        </div>
+
+        <!-- App Metadata -->
+        <div class="app-meta-box">
+            <div class="meta-item">
+                <h4>Application</h4>
+                <p>MegaTicTacToe</p>
+            </div>
+            <div class="meta-item">
+                <h4>Platform</h4>
+                <p>iOS 16.0+ (iMessage & iPhone)</p>
+            </div>
+            <div class="meta-item">
+                <h4>Developer</h4>
+                <p>Kyle Burchesky</p>
+            </div>
+            <div class="meta-item">
+                <h4>Support Response</h4>
+                <p>Within 24–48 Hours</p>
+            </div>
+        </div>
+
+        <!-- Frequently Asked Questions -->
+        <div class="faq-section">
+            <h2 class="section-heading">Frequently Asked Questions</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3 class="faq-question">How do I start a game in iMessage?</h3>
+                    <div class="faq-answer">
+                        Open the <strong>Messages</strong> app on your iPhone or iPad, tap into any conversation with a friend or family member, tap the <strong>App Drawer (+)</strong> icon below the text bar, select <strong>MegaTicTacToe</strong>, and tap <strong>New Game</strong> to send the first move.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">What if my opponent doesn't have MegaTicTacToe installed?</h3>
+                    <div class="faq-answer">
+                        When you send a move to a friend who doesn't have MegaTicTacToe yet, Messages will display the interactive game bubble with a preview. Tapping the bubble will automatically direct them to download MegaTicTacToe from the App Store so they can immediately reply with their move.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">How does the turn mechanism and board choice work?</h3>
+                    <div class="faq-answer">
+                        MegaTicTacToe is played on an 81-cell board consisting of a 3×3 grid of 9 mini boards. Whichever cell you pick inside a mini board determines which mini board your opponent must play in on their turn. For instance, clicking the bottom-left square of any mini board forces your opponent to play somewhere inside the bottom-left mini board.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">What happens if I am sent to a mini board that is already won or full?</h3>
+                    <div class="faq-answer">
+                        This triggers the <strong>Free Choice</strong> rule! If your opponent's move directs you to a board that has already been won or is tied/filled, you are free to place your symbol in any available square anywhere on the entire board.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I play solo against the computer?</h3>
+                    <div class="faq-answer">
+                        Yes! In the MegaTicTacToe app header, switch to <strong>Solo AI</strong> mode. You can practice strategies against the built-in MegaAI bot offline without needing an active internet connection.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Does MegaTicTacToe collect my data or read my messages?</h3>
+                    <div class="faq-answer">
+                        No. MegaTicTacToe does not collect, track, or share any personal data or messages. Moves are encoded strictly into Apple's official iMessage session URLs directly between participants. Read our full <a href="PrivacyPolicy.html">Privacy Policy</a> for complete details.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">How do I report a bug or request a feature?</h3>
+                    <div class="faq-answer">
+                        Please email us at <a href="mailto:kyle.burchesky@mac.com?subject=MegaTicTacToe%20Feedback">kyle.burchesky@mac.com</a> with your iOS version and a brief description of the issue or feature suggestion. We love hearing from our players!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="index.html">Marketing Page</a></li>
+                <li><a href="support.html">Support & Contact</a></li>
+                <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+            </ul>
+            <p class="footer-copy">&copy; 2026 Kyle Burchesky. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

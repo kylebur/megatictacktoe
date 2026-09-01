@@ -1,0 +1,37 @@
+# OS & Editors
+.DS_Store
+*/.DS_Store
+.vscode/
+.idea/
+
+# Xcode & DerivedData
+build/
+DerivedData/
+*.xcuserstate
+project.xcworkspace/xcuserdata/
+*.xcuserdatad
+*.xcscmblueprint
+*.xcarchive
+
+# Temporary exports and logs
+ExportTest/
+ExportedApp/
+*.xcdistributionlogs
+
+# Swift Package Manager
+.build/
+Packages/
+Package.pins
+Package.resolved
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+
+# Certificates, Keys & Provisioning Profiles (Security)
+*.key
+*.cer
+*.certSigningRequest
+*.p12
+*.p8
+*.mobileprovision
+
+# Temporary backups
+*.backup.png
