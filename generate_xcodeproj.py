@@ -398,7 +398,7 @@ def make_project():
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.megatictactoe.MegaTicTacToe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.megatictactoe.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -420,7 +420,7 @@ def make_project():
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.megatictactoe.MegaTicTacToe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.megatictactoe.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -430,7 +430,7 @@ def make_project():
 		{id_ext_debug_config} /* Debug */ = {{
 			isa = XCBuildConfiguration;
 			buildSettings = {{
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				ASSETCATALOG_COMPILER_STICKER_PACK_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -443,7 +443,7 @@ def make_project():
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.megatictactoe.MegaTicTacToe.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.megatictactoe.app.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -453,7 +453,7 @@ def make_project():
 		{id_ext_release_config} /* Release */ = {{
 			isa = XCBuildConfiguration;
 			buildSettings = {{
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				ASSETCATALOG_COMPILER_STICKER_PACK_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -466,7 +466,7 @@ def make_project():
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.megatictactoe.MegaTicTacToe.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.megatictactoe.app.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
